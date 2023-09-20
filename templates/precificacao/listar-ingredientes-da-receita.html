@@ -1,0 +1,29 @@
+{% extends 'shared/base.html' %} {% load static %} {% block content %}
+<h1 class="mt-5">Receita: {{ receita.nome }}</h1>
+<p>Descrição: {{ receita.descricao }}</p>
+
+<h2>Ingredientes</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nome do Ingrediente</th>
+            <th>Quantidade da Embalagem</th>
+            <th>Valor da Embalagem</th>
+            <th>Quantidade Usada</th>
+            <th>Valor</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ingrediente in receita.ingrediente_set.all %}
+        <tr>
+            <td>{{ ingrediente.nome }}</td>
+            <td>{{ ingrediente.quantidade_embalagem }}</td>
+            <td>{{ ingrediente.valor_embalagem }}</td>
+            <td>{{ ingrediente.quantidade_usada }}</td>
+            <td>{{ ingrediente.valor|floatformat:2 }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a name="add-ingrediente" id="add-ingrediente" class="btn btn-success" href="{% url 'adicionar_ingrediente' receita.id %}" role="button">Adicionar ingrediente</a>
+{% endblock %}

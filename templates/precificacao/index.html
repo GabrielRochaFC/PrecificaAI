@@ -13,5 +13,25 @@
       href="{% url 'cadastro_receita' %}" role="button">Criar nova precificação</a>
   </div>
 </div>
+<!-- Seção com os Cards das precificações já realizadas. -->
+<div class="row mt-3">
+  {% if cards %}
+    {% for receita in cards %}
+      <div class="col-md-4"> <!-- Defina o tamanho das colunas conforme necessário -->
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">{{ receita.nome }}</h5>
+            <p class="card-text">{{ receita.descricao }}</p>
+            <a href="{% url 'listar_ingredientes_da_receita' receita.id %}" class="card-link">Página de ingredientes</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <div class="col">
+      <p>Você ainda não cadastrou nenhuma receita. Clique no botão acima e elas aparecerão aqui.</p>
+    </div>
+  {% endif %}
+</div>
 
 {% endblock %}

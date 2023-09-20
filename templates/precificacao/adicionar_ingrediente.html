@@ -1,0 +1,26 @@
+{% extends 'shared/base.html' %} {% load static %} {% block content %}
+<div class="row">
+  <h1 class="col">Adicionar ingrediente para "{{ receita.nome }}"</h1>
+</div>
+<div class="row">
+  <form method="POST" class="col">
+    {% csrf_token %}
+    {% for field in form.visible_fields %}
+
+      <label for="{{ field.id_for_label }}">{{field.label}}</label>
+      {{ field }}
+    
+    {% for error in field.errors %}
+    <div class="alert alert-danger">
+      {{error}}
+    </div>
+    {% endfor %}
+    {% endfor %}
+    <button type="submit" class="btn btn-success">Adicionar Ingrediente</button>
+  </form>
+</div>
+<div class="row mt-3">
+  <a href="{% url 'listar_ingredientes_da_receita' receita.id %}" class="btn btn-outline-primary">Voltar para a lista de
+    ingredientes</a>
+</div>
+{% endblock %}

@@ -1,19 +1,21 @@
 {% extends 'shared/base.html' %} {% load static %} {% block content %}
 <div class="row mt-5">
   <div class="col">
-    <h4>Primeiramente, iremos cadastrar o nome da receita.</h4>
+    <h4>Primeiramente, iremos cadastrar o nome da receita que você quer precificar.</h4>
     <p>Posteriormente iremos usar isso para que você consiga diferenciar cada precificação que irá fazer.</p>
   </div>
 </div>
 <div class="row">
   <div class="col">
-    <form action="">
+    <form action="{% url 'cadastro_receita' %}" method="POST">
+      {% csrf_token %}
+      {% for field in form.visible_fields %}
       <div class="form-group">
-        <label for="receita">Nome da receita</label>
-        <input type="text" name="receita" id="receita" class="form-control" placeholder="Insira o nome da sua receita"
-          aria-describedby="receita--help">
-        <small id="receita--help" class="text-muted">Para uma melhor organização sugerimos que coloque um nome diferente de outros que já cadastrou</small>
+        <label for="{{ field.id_for_label }}">{{field.label}}</label>
+        {{ field }}
       </div>
+      {% endfor %}
+      <button class="btn btn-success">Cadastrar nome de receita</button>
     </form>
   </div>
 </div>
