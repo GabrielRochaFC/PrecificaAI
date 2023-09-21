@@ -1,7 +1,12 @@
 {% extends 'shared/base.html' %} {% load static %} {% block content %}
+{% include 'partials/_alerta.html' %}
 <div class="row">
   <div class="col">
+    {% if user.is_authenticated %}
+    <h1 class="mt-5 display-4">Bem vindo(a), {{ user.first_name }}!</h1>
+    {% else %}
     <h1 class="mt-5 display-4">Bem vindo(a) ao Precifica Aí!</h1>
+    {% endif %}
   </div>
 </div>
 <div class="row">

@@ -1,0 +1,30 @@
+{% extends 'shared/base.html' %} {% load static %} {% block content %}
+<div class="row mt-5 ">
+  <div class="col-6 mx-auto">
+    <h1 class="display-4">Bem, vindo(a) ao Precifica aí!</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-6 mx-auto">Para prosseguir, você precisa realizar o login.</div>
+</div>
+<div class="row">
+  <div class="col-6 mx-auto mt-5">
+    <form action="{% url 'login' %}" method="POST">
+      {% csrf_token %}
+      {% for field in form.visible_fields %}
+      <div style="margin-bottom: 0.625rem;">
+        <label for="{{ field.id_for_label }}" style="margin-bottom: 5px;">{{field.label}}</label>
+        {{ field }}
+      </div>
+      {% endfor %}
+      <div class="text-center ">
+        <button class="btn btn-success w-100" style="padding: top 5px;" type="submit">Fazer
+          login</button>
+      </div>
+      <a name="cadastro_loginform" id="cadastro_loginform" class="btn btn-outline-primary w-100 mt-2"
+        href="{% url 'cadastro' %}" role="button">Cadastrar</a>
+    </form>
+    {% include 'partials/_alerta.html' %}
+  </div>
+</div>
+{% endblock %}

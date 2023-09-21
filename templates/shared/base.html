@@ -14,10 +14,16 @@
 
   <!-- CSS -->
   <link rel="stylesheet" href="{% static '/styles/style.css' %}">
+
+  <!-- Font Awesome 4 -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
-  {% include 'partials/_header.html' %}
+  {% if user.is_authenticated %}
+    <!-- Mostrar o menu apenas quando o usuário estiver autenticado -->
+    {% include 'partials/_header.html' %}
+  {% endif %}
   <div class="container">
     {% block content %}
     {% endblock %}
